@@ -9,9 +9,9 @@ data = np.loadtxt(str(sys.argv[1]),
 
 print(f"Starting {str(sys.argv[1])}")
 
-col_1 = data.T[0]/1000 # get to units of GeV
+col_1 = data.T[0] / 1000 # get to units of GeV
 
-other_cols = data.T[1] / 10000 # match units to get to 10^-38
+other_cols = data.T[1] * 10000 # match units to get to 10^-38
 
 
 # need to extend cross section to 0.2000 GeV
