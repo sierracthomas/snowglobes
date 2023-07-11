@@ -39,7 +39,7 @@ interp_xs = np.interp(new_x, col_1, xs)
 
 
 # log(GeV) and extend the last entry to last entry
-energy = np.log(new_x)
+energy = np.log10(new_x)
 
 #energy = np.append(energy, -1.0)
 
