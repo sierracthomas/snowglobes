@@ -11,7 +11,7 @@ print(f"Starting {str(sys.argv[1])}")
 
 col_1 = data.T[0] * (10**(-3)) # get to units of GeV
 
-other_cols = (data.T[1] * 10**(-4)) # match units to get to 10^-38
+other_cols = (data.T[1] * 10**(-4)) # match units to get to 10^-38 cm^2
 
 print("cols 1", col_1)
 
@@ -19,9 +19,13 @@ print("cols 1", col_1)
 
 print(min(col_1), max(col_1))
 
-new_x = np.linspace(min(col_1), max(col_1), 1001)
+#new_x = np.linspace(min(col_1), max(col_1), 1001)
 
-bin_size = new_x[1] - new_x[0]
+new_x = np.linspace(0, 0.1, 1001) # 0 -> 0.1 GeV
+
+new_x[0] = 10**(-10)
+
+bin_size = new_x[2] - new_x[1]
 
 print(f"bin size is {bin_size}")
 # divide by corresponding energy to get to units with 1/GeV
