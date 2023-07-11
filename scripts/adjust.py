@@ -9,33 +9,39 @@ data = np.loadtxt(str(sys.argv[1]),
 
 print(f"Starting {str(sys.argv[1])}")
 
-col_1 = data.T[0] / 1000 # get to units of GeV
+col_1 = data.T[0] * (10**(-3)) # get to units of GeV
 
-other_cols = data.T[1] * 10000 # match units to get to 10^-38
+other_cols = (data.T[1] * 10**(-4)) # match units to get to 10^-38
 
+print("cols 1", col_1)
 
 # need to extend cross section to 0.2000 GeV
 
 print(min(col_1), max(col_1))
 
-new_x = np.linspace(min(col_1), max(col_1), 1000)#1001)
+new_x = np.linspace(min(col_1), max(col_1), 1001)
 
+bin_size = new_x[1] - new_x[0]
 
+print(f"bin size is {bin_size}")
 # divide by corresponding energy to get to units with 1/GeV
-xs = [i/j for i,j in zip(other_cols, col_1)]
+#xs = [i/j for i,j in zip(other_cols, col_1)]
+xs = other_cols / bin_size
 
+#xs = other_cols
 
 # interpolate between xs numbers to match number of entries in other xs's
 # also, extend the number by one
+
 interp_xs = np.interp(new_x, col_1, xs)
 
-interp_xs = np.append(interp_xs, interp_xs[-1])
+#interp_xs = np.append(interp_xs, interp_xs[-1])
 
 
 # log(GeV) and extend the last entry to last entry
 energy = np.log(new_x)
 
-energy = np.append(energy, -1.0)
+#energy = np.append(energy, -1.0)
 
 print(energy, interp_xs)
 
@@ -51,7 +57,7 @@ with open(f"xs_{str(sys.argv[2])}.dat","w") as writer:
     writer.write("\n")
     # Data
     for i in range(len(energy)):#1,1002):
-          writer.write(f"{energy[i]}   {interp_xs[i]}   {interp_xs[i]}   {interp_xs[i]}   {interp_xs[i]}   {interp_xs[i]}   {interp_xs[i]}\n")
+          writer.write(f"{np.format_float_scientific(np.float32(energy[i]))}   {np.format_float_scientific(np.float32(interp_xs[i]))}   {np.format_float_scientific(np.float32(interp_xs[i]))}   {np.format_float_scientific(np.float32(interp_xs[i]))}   {np.format_float_scientific(np.float32(interp_xs[i]))}   {np.format_float_scientific(np.float32(interp_xs[i]))}   {np.format_float_scientific(np.float32(interp_xs[i]))}\n")
 
 
 # need to extend xs to higher energy levels 
