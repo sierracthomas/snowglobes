@@ -29,8 +29,8 @@ bin_size = new_x[2] - new_x[1]
 
 print(f"bin size is {bin_size}")
 # divide by corresponding energy to get to units with 1/GeV
-#xs = [i/j for i,j in zip(other_cols, col_1)]
-xs = other_cols / bin_size
+xs = [i/j for i,j in zip(other_cols, col_1)]
+#xs = other_cols / bin_size
 
 #xs = other_cols
 
