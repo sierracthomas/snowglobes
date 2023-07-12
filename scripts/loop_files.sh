@@ -1,7 +1,8 @@
 #!/bin/bash
 
 
-
+source channel_files.sh neutrino-xs.csv nc_Ar40_allm1
+source channel_files.sh aneutrino-xs.csv nc_Ar40_allm1a
 source channel_files.sh 4.473_anu.csv nc_Ar40_1na
 source channel_files.sh 4.473_nu.csv nc_Ar40_1n
 source channel_files.sh 5.393_anu.csv nc_Ar40_2na
